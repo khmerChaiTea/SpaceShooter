@@ -37,6 +37,7 @@
             this.DownMoveTimer = new System.Timers.Timer();
             this.MoveMunitionTimer = new System.Timers.Timer();
             this.MoveEnemiesTimer = new System.Timers.Timer();
+            this.EnemiesMunitionTimer = new System.Timers.Timer();
             ((System.ComponentModel.ISupportInitialize)(this.MoveBgTimer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Player)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LeftMoveTimer)).BeginInit();
@@ -45,6 +46,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DownMoveTimer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MoveMunitionTimer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MoveEnemiesTimer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EnemiesMunitionTimer)).BeginInit();
             this.SuspendLayout();
             // 
             // MoveBgTimer
@@ -98,13 +100,20 @@
             this.MoveMunitionTimer.Enabled = true;
             this.MoveMunitionTimer.Interval = 20D;
             this.MoveMunitionTimer.SynchronizingObject = this;
-            this.MoveMunitionTimer.Elapsed += new System.Timers.ElapsedEventHandler(this.timer1_Elapsed);
+            this.MoveMunitionTimer.Elapsed += new System.Timers.ElapsedEventHandler(this.MoveMunitionTimer_Elapsed);
             // 
             // MoveEnemiesTimer
             // 
             this.MoveEnemiesTimer.Enabled = true;
             this.MoveEnemiesTimer.SynchronizingObject = this;
             this.MoveEnemiesTimer.Elapsed += new System.Timers.ElapsedEventHandler(this.MoveEnemiesTimer_Elapsed);
+            // 
+            // EnemiesMunitionTimer
+            // 
+            this.EnemiesMunitionTimer.Enabled = true;
+            this.EnemiesMunitionTimer.Interval = 20D;
+            this.EnemiesMunitionTimer.SynchronizingObject = this;
+            this.EnemiesMunitionTimer.Elapsed += new System.Timers.ElapsedEventHandler(this.EnemiesMunitionTimer_Elapsed);
             // 
             // Form1
             // 
@@ -128,6 +137,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DownMoveTimer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MoveMunitionTimer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MoveEnemiesTimer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EnemiesMunitionTimer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -142,6 +152,7 @@
         private System.Timers.Timer DownMoveTimer;
         private System.Timers.Timer MoveMunitionTimer;
         private System.Timers.Timer MoveEnemiesTimer;
+        private System.Timers.Timer EnemiesMunitionTimer;
     }
 }
 
