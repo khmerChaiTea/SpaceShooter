@@ -8,11 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WMPLib;
 
 namespace SpaceShooter
 {
     public partial class Form1 : Form
     {
+        WindowsMediaPlayer gameMedia;
+        WindowsMediaPlayer shootgMedia;
+
         // Array to hold PictureBox objects representing stars
         PictureBox[] stars;
         // Speed at which the player will move
@@ -55,8 +59,20 @@ namespace SpaceShooter
                 munitions[i].SizeMode = PictureBoxSizeMode.Zoom;
                 munitions[i].BorderStyle = BorderStyle.None;
                 this.Controls.Add(munitions[i]);
-
             }
+
+            // Create MP
+            gameMedia = new WindowsMediaPlayer();
+            shootgMedia = new WindowsMediaPlayer();
+
+            // Load all songs
+            gameMedia.URL = "songs\\GameSong.mp3";
+            shootgMedia.URL = "songs\\shoot.mp3";
+
+            // Setup Songs setting
+            gameMedia.settings.setMode("loop", true);
+            gameMedia.settings.volume = 5;
+            shootgMedia.settings.volume = 1;
 
             // Create an array to hold 10 PictureBox objects
             stars = new PictureBox[15];
@@ -90,6 +106,8 @@ namespace SpaceShooter
                 // Add the PictureBox (star) to the form's controls
                 this.Controls.Add(stars[i]);
             }
+
+            gameMedia.controls.play();
         }
 
         // Event handler for the Timer's Elapsed event to move the background (stars)
@@ -218,6 +236,7 @@ namespace SpaceShooter
 
         private void timer1_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
+            shootgMedia.controls.play();
             for (int i = 0; i < munitions.Length; i++)
             {
                 if (munitions[i].Top > 0)
