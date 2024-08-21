@@ -14,8 +14,10 @@ namespace SpaceShooter
     {
         // Array to hold PictureBox objects representing stars
         PictureBox[] stars;
+        // Speed at which the player will move
+        int playerSpeed;
         // Speed at which the background (stars) will move
-        int backgroundspeed;
+        int backgroundSpeed;
         // Random number generator for positioning stars randomly
         Random rnd;
 
@@ -28,8 +30,13 @@ namespace SpaceShooter
         // Event handler for the Form's Load event
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Set the background color of the form to blue
+            this.BackColor = Color.Blue;
+
+            // Initialize the player speed
+            playerSpeed = 4;
             // Initialize the background speed
-            backgroundspeed = 4;
+            backgroundSpeed = 4;
             // Create an array to hold 10 PictureBox objects
             stars = new PictureBox[10];
             // Initialize the random number generator
@@ -71,7 +78,7 @@ namespace SpaceShooter
             for (int i = 0; i < stars.Length / 2; i++)
             {
                 // Move the star down by the background speed
-                stars[i].Top += backgroundspeed;
+                stars[i].Top += backgroundSpeed;
 
                 // If the star moves past the bottom of the form, reset it to the top
                 if (stars[i].Top >= this.Height)
@@ -84,7 +91,7 @@ namespace SpaceShooter
             for (int i = stars.Length / 2; i < stars.Length; i++)
             {
                 // Move the star down by slightly less than the background speed
-                stars[i].Top += backgroundspeed - 2;
+                stars[i].Top += backgroundSpeed - 2;
 
                 // If the star moves past the bottom of the form, reset it to the top
                 if (stars[i].Top >= this.Height)
@@ -92,6 +99,100 @@ namespace SpaceShooter
                     stars[i].Top -= -stars[i].Height;
                 }
             }
+        }
+
+        // This method is called when the LeftMoveTimer elapses.
+        // It moves the player to the left as long as the player's left edge is greater than 10 pixels from the left edge of the form.
+        private void LeftMoveTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            // Check if the player's left side is greater than 10 pixels from the left edge of the form.
+            if (Player.Left > 10)
+            {
+                // Move the player to the left by decreasing its left position by playerSpeed.
+                Player.Left -= playerSpeed;
+            }
+        }
+
+        // This method is called when the RightMoverTimer elapses.
+        // It moves the player to the right as long as the player's right edge is less than 580 pixels from the left edge of the form.
+        private void RightMoverTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            // Check if the player's right side is less than 580 pixels from the left edge of the form.
+            if (Player.Right < 580)
+            {
+                // Move the player to the right by increasing its left position by playerSpeed.
+                Player.Left += playerSpeed;
+            }
+        }
+
+        // This method is called when the UpMoveTimer elapses.
+        // It moves the player up as long as the player's top edge is greater than 10 pixels from the top edge of the form.
+        private void UpMoveTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            // Check if the player's top side is greater than 10 pixels from the top edge of the form.
+            if (Player.Top > 10)
+            {
+                // Move the player up by decreasing its top position by playerSpeed.
+                Player.Top -= playerSpeed;
+            }
+        }
+
+        // This method is called when the DownMoveTimer elapses.
+        // It moves the player down as long as the player's top edge is less than 400 pixels from the top edge of the form.
+        private void DownMoveTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            // Check if the player's top side is less than 400 pixels from the top edge of the form.
+            if (Player.Top < 400)
+            {
+                // Move the player down by increasing its top position by playerSpeed.
+                Player.Top += playerSpeed;
+            }
+        }
+
+
+        // This method is triggered when a key is pressed down while the form has focus.
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Check if the right arrow key is pressed.
+            if (e.KeyCode == Keys.Right)
+            {
+                // Start the timer that handles moving the player to the right.
+                RightMoverTimer.Start();
+            }
+
+            // Check if the left arrow key is pressed.
+            if (e.KeyCode == Keys.Left)
+            {
+                // Start the timer that handles moving the player to the left.
+                LeftMoveTimer.Start();
+            }
+
+            // Check if the up arrow key is pressed.
+            if (e.KeyCode == Keys.Up)
+            {
+                // Start the timer that handles moving the player up.
+                UpMoveTimer.Start();
+            }
+
+            // Check if the down arrow key is pressed.
+            if (e.KeyCode == Keys.Down)
+            {
+                // Start the timer that handles moving the player down.
+                DownMoveTimer.Start();
+            }
+        }
+
+        // This method is triggered when a key is released while the form has focus.
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            // Stop the timer that moves the player to the right when the key is released.
+            RightMoverTimer.Stop();
+            // Stop the timer that moves the player to the left when the key is released.
+            LeftMoveTimer.Stop();
+            // Stop the timer that moves the player up when the key is released.
+            UpMoveTimer.Stop();
+            // Stop the timer that moves the player down when the key is released.
+            DownMoveTimer.Stop();
         }
     }
 }
