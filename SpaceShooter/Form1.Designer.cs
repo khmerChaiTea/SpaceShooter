@@ -35,12 +35,14 @@
             this.RightMoverTimer = new System.Timers.Timer();
             this.UpMoveTimer = new System.Timers.Timer();
             this.DownMoveTimer = new System.Timers.Timer();
+            this.MoveMunitionTimer = new System.Timers.Timer();
             ((System.ComponentModel.ISupportInitialize)(this.MoveBgTimer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Player)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LeftMoveTimer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RightMoverTimer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpMoveTimer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DownMoveTimer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MoveMunitionTimer)).BeginInit();
             this.SuspendLayout();
             // 
             // MoveBgTimer
@@ -89,10 +91,18 @@
             this.DownMoveTimer.SynchronizingObject = this;
             this.DownMoveTimer.Elapsed += new System.Timers.ElapsedEventHandler(this.DownMoveTimer_Elapsed);
             // 
+            // MoveMunitionTimer
+            // 
+            this.MoveMunitionTimer.Enabled = true;
+            this.MoveMunitionTimer.Interval = 20D;
+            this.MoveMunitionTimer.SynchronizingObject = this;
+            this.MoveMunitionTimer.Elapsed += new System.Timers.ElapsedEventHandler(this.timer1_Elapsed);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Blue;
             this.ClientSize = new System.Drawing.Size(584, 461);
             this.Controls.Add(this.Player);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -108,6 +118,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.RightMoverTimer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpMoveTimer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DownMoveTimer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MoveMunitionTimer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -120,6 +131,7 @@
         private System.Timers.Timer RightMoverTimer;
         private System.Timers.Timer UpMoveTimer;
         private System.Timers.Timer DownMoveTimer;
+        private System.Timers.Timer MoveMunitionTimer;
     }
 }
 

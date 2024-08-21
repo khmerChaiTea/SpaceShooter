@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,10 @@ namespace SpaceShooter
         // Speed at which the background (stars) will move
         int backgroundSpeed;
         // Random number generator for positioning stars randomly
+
+        PictureBox[] munitions;
+        int munitionSpeed;
+
         Random rnd;
 
         // Constructor for the Form1 class
@@ -30,15 +35,31 @@ namespace SpaceShooter
         // Event handler for the Form's Load event
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Set the background color of the form to blue
-            this.BackColor = Color.Blue;
-
-            // Initialize the player speed
+             // Initialize the player speed
             playerSpeed = 4;
             // Initialize the background speed
             backgroundSpeed = 4;
+
+            // Initialize the munition speed
+            munitionSpeed = 20;
+            munitions = new PictureBox[3];
+
+            // Load images
+            Image munition = Image.FromFile(@"asserts\munition.png");
+
+            for (int i = 0; i < munitions.Length; i++)
+            {
+                munitions[i] = new PictureBox();
+                munitions[i].Size = new Size(8, 8);
+                munitions[i].Image = munition;
+                munitions[i].SizeMode = PictureBoxSizeMode.Zoom;
+                munitions[i].BorderStyle = BorderStyle.None;
+                this.Controls.Add(munitions[i]);
+
+            }
+
             // Create an array to hold 10 PictureBox objects
-            stars = new PictureBox[10];
+            stars = new PictureBox[15];
             // Initialize the random number generator
             rnd = new Random();
 
@@ -193,6 +214,23 @@ namespace SpaceShooter
             UpMoveTimer.Stop();
             // Stop the timer that moves the player down when the key is released.
             DownMoveTimer.Stop();
+        }
+
+        private void timer1_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            for (int i = 0; i < munitions.Length; i++)
+            {
+                if (munitions[i].Top > 0)
+                {
+                    munitions[i].Visible = true;
+                    munitions[i].Top -= munitionSpeed;
+                }
+                else
+                {
+                    munitions[i].Visible = false;
+                    munitions[i].Location = new Point(Player.Location.X + 20, Player.Location.Y - i * 30);
+                }
+            }
         }
     }
 }
