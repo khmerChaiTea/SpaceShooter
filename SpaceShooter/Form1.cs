@@ -28,6 +28,9 @@ namespace SpaceShooter
         PictureBox[] munitions;
         int munitionSpeed;
 
+        PictureBox[] enemies;
+        int enemySpeed;
+
         Random rnd;
 
         // Constructor for the Form1 class
@@ -43,13 +46,46 @@ namespace SpaceShooter
             playerSpeed = 4;
             // Initialize the background speed
             backgroundSpeed = 4;
-
+            // Initialize the enemy speed
+            enemySpeed = 4;
             // Initialize the munition speed
             munitionSpeed = 20;
+
             munitions = new PictureBox[3];
 
             // Load images
             Image munition = Image.FromFile(@"asserts\munition.png");
+
+            Image enemy1 = Image.FromFile("asserts\\E1.png");
+            Image enemy2 = Image.FromFile("asserts\\E2.png");
+            Image enemy3 = Image.FromFile("asserts\\E3.png");
+            Image boss1 = Image.FromFile("asserts\\Boss1.png");
+            Image boss2 = Image.FromFile("asserts\\Boss2.png");
+
+            enemies = new PictureBox[10];
+
+            // Initialize Enemy Picture Boxes
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                enemies[i] = new PictureBox();
+                enemies[i].Size = new Size(40, 40);
+                enemies[i].SizeMode = PictureBoxSizeMode.Zoom;
+                enemies[i].BorderStyle = BorderStyle.None;
+                enemies[i].Visible = false;
+                this.Controls.Add(enemies[i]);
+                enemies[i].Location = new Point((i + 1) * 50, -50); 
+            }
+
+            enemies[0].Image = boss1;
+            enemies[1].Image = enemy2;
+            enemies[2].Image = enemy3;
+            enemies[3].Image = enemy3;
+            enemies[4].Image = enemy1;
+            enemies[5].Image = enemy3;
+            enemies[6].Image = enemy2;
+            enemies[7].Image = enemy3;
+            enemies[8].Image = enemy2;
+            enemies[9].Image = boss2;
 
             for (int i = 0; i < munitions.Length; i++)
             {
@@ -248,6 +284,25 @@ namespace SpaceShooter
                 {
                     munitions[i].Visible = false;
                     munitions[i].Location = new Point(Player.Location.X + 20, Player.Location.Y - i * 30);
+                }
+            }
+        }
+
+        private void MoveEnemiesTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            MoveEnemies(enemies, enemySpeed);
+        }
+
+        private void MoveEnemies(PictureBox[] array, int speed)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i].Visible = true;
+                array[i].Top += speed;
+
+                if (array[i].Top > this.Height)
+                {
+                    array[i].Location = new Point((i + 1) * 50, -200);
                 }
             }
         }
