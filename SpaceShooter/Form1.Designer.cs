@@ -38,6 +38,11 @@
             this.MoveMunitionTimer = new System.Timers.Timer();
             this.MoveEnemiesTimer = new System.Timers.Timer();
             this.EnemiesMunitionTimer = new System.Timers.Timer();
+            this.label = new System.Windows.Forms.Label();
+            this.Replay = new System.Windows.Forms.Button();
+            this.Exit = new System.Windows.Forms.Button();
+            this.scorelbl = new System.Windows.Forms.Label();
+            this.levellbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.MoveBgTimer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Player)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LeftMoveTimer)).BeginInit();
@@ -115,12 +120,78 @@
             this.EnemiesMunitionTimer.SynchronizingObject = this;
             this.EnemiesMunitionTimer.Elapsed += new System.Timers.ElapsedEventHandler(this.EnemiesMunitionTimer_Elapsed);
             // 
+            // label
+            // 
+            this.label.Font = new System.Drawing.Font("Algerian", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label.ForeColor = System.Drawing.Color.Red;
+            this.label.Location = new System.Drawing.Point(62, 126);
+            this.label.Name = "label";
+            this.label.Size = new System.Drawing.Size(452, 95);
+            this.label.TabIndex = 1;
+            this.label.Text = "label1";
+            this.label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label.Visible = false;
+            // 
+            // Replay
+            // 
+            this.Replay.Font = new System.Drawing.Font("Algerian", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Replay.ForeColor = System.Drawing.Color.Black;
+            this.Replay.Location = new System.Drawing.Point(218, 321);
+            this.Replay.Name = "Replay";
+            this.Replay.Size = new System.Drawing.Size(138, 23);
+            this.Replay.TabIndex = 2;
+            this.Replay.Text = "REPLAY";
+            this.Replay.UseVisualStyleBackColor = true;
+            this.Replay.Visible = false;
+            this.Replay.Click += new System.EventHandler(this.Replay_Click);
+            // 
+            // Exit
+            // 
+            this.Exit.Font = new System.Drawing.Font("Algerian", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Exit.ForeColor = System.Drawing.Color.Black;
+            this.Exit.Location = new System.Drawing.Point(218, 360);
+            this.Exit.Name = "Exit";
+            this.Exit.Size = new System.Drawing.Size(138, 23);
+            this.Exit.TabIndex = 3;
+            this.Exit.Text = "EXIT";
+            this.Exit.UseVisualStyleBackColor = true;
+            this.Exit.Visible = false;
+            this.Exit.Click += new System.EventHandler(this.Exit_Click);
+            // 
+            // scorelbl
+            // 
+            this.scorelbl.Font = new System.Drawing.Font("Algerian", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.scorelbl.ForeColor = System.Drawing.Color.Gold;
+            this.scorelbl.Location = new System.Drawing.Point(12, 9);
+            this.scorelbl.Name = "scorelbl";
+            this.scorelbl.Size = new System.Drawing.Size(100, 23);
+            this.scorelbl.TabIndex = 4;
+            this.scorelbl.Text = "label1";
+            this.scorelbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // levellbl
+            // 
+            this.levellbl.AutoSize = true;
+            this.levellbl.Font = new System.Drawing.Font("Algerian", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.levellbl.ForeColor = System.Drawing.Color.Gold;
+            this.levellbl.Location = new System.Drawing.Point(491, 9);
+            this.levellbl.Name = "levellbl";
+            this.levellbl.Size = new System.Drawing.Size(81, 18);
+            this.levellbl.TabIndex = 5;
+            this.levellbl.Text = "Level: 0";
+            this.levellbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Blue;
             this.ClientSize = new System.Drawing.Size(584, 461);
+            this.Controls.Add(this.levellbl);
+            this.Controls.Add(this.scorelbl);
+            this.Controls.Add(this.Exit);
+            this.Controls.Add(this.Replay);
+            this.Controls.Add(this.label);
             this.Controls.Add(this.Player);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(600, 500);
@@ -139,6 +210,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.MoveEnemiesTimer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.EnemiesMunitionTimer)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -153,6 +225,11 @@
         private System.Timers.Timer MoveMunitionTimer;
         private System.Timers.Timer MoveEnemiesTimer;
         private System.Timers.Timer EnemiesMunitionTimer;
+        private System.Windows.Forms.Button Exit;
+        private System.Windows.Forms.Button Replay;
+        private System.Windows.Forms.Label label;
+        private System.Windows.Forms.Label levellbl;
+        private System.Windows.Forms.Label scorelbl;
     }
 }
 
